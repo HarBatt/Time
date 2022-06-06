@@ -1,3 +1,3 @@
 # ts_generation
 
-Time Series Generation
+Synthetic time series data generation using generative adversarial networks
