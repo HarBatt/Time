@@ -1,6 +1,6 @@
 import torch 
 import torch.nn as nn
-from utils import batch_generator
+from shared.utils import batch_generator
 
 
 class Generator(nn.Module):

@@ -14,31 +14,28 @@ from models.rgan import rgan
 from models.wrgan_gp import wrgan_gp
 # 2. Data loading
 from data_loading import real_data_loading
-# 3. Utils
-from utils import Parameters
 
-#set the device 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+from shared.constants import Parameters
+import shared.constants as constants
 
 ## Data loading
-data_path = "data/"
-dataset = "energy"
-path_real_data = "data/" + dataset + "_data.csv"
+data_path = constants.data_path
+path_real_data = constants.path_real_data
+dataset = constants.dataset
+save_synth_data = constants.save_synth_data
 
 #parameters
-
 params = Parameters()
-params.dataset = dataset
-params.data_path = "data/" + params.dataset + "_data.csv"
-params.model_save_path = "saved_models/" + params.dataset
+params.dataset = constants.dataset
+params.data_path = constants.data_path
+params.model_save_path = constants.model_save_path
 params.seq_len = 24
 params.batch_size = 128
 params.max_steps = 100
 params.gamma = 1.0 #Paramter for TimeGAN
 params.save_model = True
 params.print_every = 750
-params.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-params.save_synth_data = False
+params.device = constants.device
 
 params.latent_dim = 10 #Latent dim for the generator paramter for wrgan and rgan
 params.disc_extra_steps = 1 #Extra steps for the discriminator; 5 is the original value from the paper.
@@ -64,7 +61,7 @@ params.num_layers = 3
 
 print('Preprocessing Complete!')
    
-with open(data_path + params.dataset + '_real_data.npy', 'wb') as f:
+with open(data_path + dataset + '_real_data.npy', 'wb') as f:
     np.save(f, np.array(ori_data))
 
 print("Saved real data!")
@@ -75,6 +72,6 @@ generated_data = wrgan_gp(ori_data, params)
 # # Renormalization
 # generated_data = generated_data*maximum
 # generated_data = generated_data + minimum 
-
-with open(data_path + params.dataset + '_synthetic_data.npy', 'wb') as f:
-    np.save(f, np.array(generated_data))
+if save_synth_data:
+    with open(data_path + params.dataset + '_synthetic_data.npy', 'wb') as f:
+        np.save(f, np.array(generated_data))

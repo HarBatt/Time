@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch import optim
 from itertools import chain
-from utils import batch_generator
+from shared.utils import batch_generator
 
 
 class RNNnet(nn.Module):
