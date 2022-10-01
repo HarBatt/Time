@@ -1,4 +1,3 @@
-"""module for component logger"""
 import inspect
 from abc import ABCMeta
 from enum import IntEnum as Enum
@@ -30,9 +29,8 @@ class LogLevel(Enum):
 
 DEFAULT_LOG_LEVEL = LogLevel.VERBOSE
 
-
 class ComponentLogger(Singleton, metaclass=ABCMeta):
-    component_name = 'ts_generation'
+    component_name = 'time'
     level = DEFAULT_LOG_LEVEL
 
     def log(self, *args, level=LogLevel.INFO):

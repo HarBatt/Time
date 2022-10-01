@@ -1,6 +1,8 @@
-# Time series
+# Time Series Transformer loosely based on ViT, Vision Transformer
 
-This repo contains several explanations, implementations of SOTA Time Series algorithms, and detailed descriptions of some of the basic TS concepts.
+This repo contains ViT based implementation of Time Series transformer. There might be similar models in the literature, I did not review them. 
+
+![plot](Notes/figs/time_transformer.png)
 
 ## Getting started
 
